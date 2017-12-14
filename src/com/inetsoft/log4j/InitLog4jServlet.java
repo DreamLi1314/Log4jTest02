@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,15 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.PropertyConfigurator;
 
-@WebServlet("/InitLog4jServlet")
 public class InitLog4jServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 9203392013908166899L;
 
-	
 	@Override
 	public void init() throws ServletException {
-		super.init();
 		String path = this.getInitParameter("log4j-location");
 		System.out.println("========== path =========" + path);
 		if(path == null) {
@@ -38,6 +34,8 @@ public class InitLog4jServlet extends HttpServlet {
 				BasicConfigurator.configure();
 			}
 		}
+
+		super.init();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,5 +45,4 @@ public class InitLog4jServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
